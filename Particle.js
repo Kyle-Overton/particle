@@ -12,7 +12,7 @@ class Particle {
         //this.attract = false;
         this.parent = parent
         this.targets = [];
-        this.connectionIDs = [floor(random(50))];
+        this.connectionIDs = [floor(random(defaultAmt/5))];
         this.connections = [];
         this.edges = [];
         this.canUpdate = true;
@@ -42,7 +42,7 @@ class Particle {
                 this.targets.push(this.parent.collection[t]);
                 for(let s=0; s<this.parent.collection[t].connectionIDs.length; s++){
                     if(this.parent.collection[t].connectionIDs[s] == this.id){
-                        console.log(this.parent.collection[t].connectionIDs[s].id)
+                        //console.log(this.parent.collection[t].connectionIDs[s].id)
                         this.scale += 1;
                     }
                 }
@@ -61,12 +61,12 @@ class Particle {
         }
         for (let c = 0; c < this.connections.length; c++) {
             let end = this.connections[c];
-            console.log(end);
+            //console.log(end);
             let edge = new Edge(this, end);
             this.edges.push(edge);
             edge.draw();
         }
-        console.log(this.edges);
+        //console.log(this.edges);
     }
     checkBounds() {
 
@@ -169,6 +169,10 @@ class Particle {
     attract(end){
         if(this.canAttract){
             this.pos = p5.Vector.lerp(this.pos,end.pos,this.tic)
+            let d = p5.Vector.sub(this.pos,end.pos);
+            d.setMag(this.tic*d.mag())
+            this.pos.add(d);
+            
             this.tic += ticAmnt
         }
         if(this.tic > 1){
