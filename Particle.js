@@ -12,14 +12,18 @@ class Particle {
         //this.attract = false;
         this.parent = parent
         this.targets = [];
-        this.connectionIDs = [floor(random(defaultAmt/5))];
+        this.connectionIDs = [floor(random(defaultAmt / 5))];
         this.connections = [];
         this.edges = [];
         this.canUpdate = true;
         this.canAttract = true;
         this.size = particleSize;
-        this.scale = 1//random(.25, particleScale);
+        this.scale = 1 //random(.25, particleScale);
         this.color = particleColor;
+        this.vecColor;// = createVector(0,random(127,255),random(127,255))
+        this.newColorP = color(random(0,127),random(75,175),random(127,255));
+        this.newColorG = color(random(0,127),random(127,255),random(0,127));
+        this.newColorR = color(random(127,255),random(0,127),random(0,127));
         this.draw();
         this.isColliding;
         this.isDragging = false;
@@ -29,19 +33,46 @@ class Particle {
     style() {
         //this.color = particleColor;
         fill(this.color)
-        if (this.id == 25) {
-            fill(color(0, 0, 255));
+        
+        if (this.scale > 1) {
+            this.color = this.newColorP
+            fill(this.color);
         }
+ 
         noStroke();
         this.size = particleSize * this.scale * particleScale;
         ellipse(this.pos.x, this.pos.y, this.size, this.size);
+        // style Children
+        if (this.scale > 1) {
+            for (let p = 0; p < this.parent.collection.length; p++) {
+                if (p != this.id) {
+                    let particle = this.parent.collection[p]
+                    for (let i = 0; i < particle.connectionIDs.length; i++) {
+                        let targetID = particle.connectionIDs[i];
+                        if (targetID == this.id) {
+                            this.color = this.newColorP
+                            particle.color = this.color;
+                            particle.reStyle(particle);
+                        }
+
+                    }
+                }
+
+            }
+        }
+    }
+    reStyle(particle){
+        fill(particle.color)
+        noStroke();
+        particle.size = particleSize * particle.scale * particleScale;
+        ellipse(particle.pos.x, particle.pos.y, particle.size, particle.size);
     }
     updateTargets() {
         for (let t = 0; t < this.parent.collection.length; t++) {
             if (t != this.id) {
                 this.targets.push(this.parent.collection[t]);
-                for(let s=0; s<this.parent.collection[t].connectionIDs.length; s++){
-                    if(this.parent.collection[t].connectionIDs[s] == this.id){
+                for (let s = 0; s < this.parent.collection[t].connectionIDs.length; s++) {
+                    if (this.parent.collection[t].connectionIDs[s] == this.id) {
                         //console.log(this.parent.collection[t].connectionIDs[s].id)
                         this.scale += 1;
                     }
@@ -52,12 +83,12 @@ class Particle {
     updateConnections() {
         for (let t = 0; t < this.parent.collection.length; t++) {
 
-                for (let c = 0; c < this.connectionIDs.length; c++) {
-                    if (this.parent.collection[t].id == this.connectionIDs[c]) {
-                        this.connections.push(this.parent.collection[t]);
-                    }
+            for (let c = 0; c < this.connectionIDs.length; c++) {
+                if (this.parent.collection[t].id == this.connectionIDs[c]) {
+                    this.connections.push(this.parent.collection[t]);
                 }
-            
+            }
+
         }
         for (let c = 0; c < this.connections.length; c++) {
             let end = this.connections[c];
@@ -166,16 +197,16 @@ class Particle {
             this.attract(end);
         }
     }
-    attract(end){
-        if(this.canAttract){
-            this.pos = p5.Vector.lerp(this.pos,end.pos,this.tic)
-            let d = p5.Vector.sub(this.pos,end.pos);
-            d.setMag(this.tic*d.mag())
+    attract(end) {
+        if (this.canAttract) {
+            this.pos = p5.Vector.lerp(this.pos, end.pos, this.tic)
+            let d = p5.Vector.sub(this.pos, end.pos);
+            d.setMag(this.tic * d.mag())
             this.pos.add(d);
-            
+
             this.tic += ticAmnt
         }
-        if(this.tic > 1){
+        if (this.tic > 1) {
             this.canAttract = false;
         }
     }
