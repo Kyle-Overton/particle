@@ -1,0 +1,41 @@
+.UIContainer{
+    display: flex;
+    flex-direction: column;
+    width: 480px;
+    padding: 10px;
+    background-color: #333;
+}
+.sliderContainer{
+    width:100%;
+    -webkit-appearance: none;
+    appearance:none;
+}
+.slider{
+    background-color:#444;
+    -webkit-appearance: none;
+    appearance:none;
+    height:12px;
+    width:100%;
+}
+.slider::-webkit-slider-thumb{
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 14px; /* Set a specific slider handle width */
+    height: 14px; /* Slider handle height */
+    background: #aaa; /* Grey background */
+    cursor: pointer; /* Cursor on hover */
+}
+.slider::-webkit-slider-thumb:hover{
+    background: #ccc; /* Grey background */
+}
+.slider::-webkit-slider-thumb:focus{
+    border:0px solid;
+}
+h3{
+    color:#ccc;
+    font-family:'Courier New';
+    font-weight:800;
+    font-size:12px;
+    margin:0px;
+
+}
