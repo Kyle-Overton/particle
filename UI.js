@@ -1,11 +1,13 @@
 class UIElements{
     constructor(){
         this.pScaleSlider = select('#particleScale');
+        this.myConsole = select('#myConsole');
         this.pScaleSlider.value(map(1,.5,2,1,100));
         this.Gravity = select('#Gravity');
         this.Gravity.value(map(particleSize,25,50,1,100))
         this.Tic = select('#tic');
         this.Tic.value(map(.005,.001,.01,1,100))
+        
 
  
     }

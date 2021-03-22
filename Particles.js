@@ -8,11 +8,12 @@ class Particles{
         for(let a=0; a<amt; a++){
             let particle = new Particle(random(particleSize,width-particleSize),random(particleSize,height-particleSize),this)
             particle.id = a;
-            particle.size = random(25,50)
+            //particle.size = random(25,50)
             //console.log(particle.checkCollision())
             particle.checkCollision();
+            
             //console.log(particle.isColliding);
-            while(particle.constructedColliding){  
+            while(particle.isColliding){  
                 particle.pos = createVector(random(particleSize,width-particleSize))
                 particle.checkCollision();
                 console.log("detected collision")

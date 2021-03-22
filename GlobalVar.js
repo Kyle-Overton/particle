@@ -16,16 +16,16 @@ let limitSpeed;
 let edgeStroke;
 
 function preload(){
-    defaultAmt = 50;
-    particleSize = 10//random(25,50);
+    defaultAmt = 20;
+    particleSize = random(5,25);
     particleScale = 1;
     particleColor = color(255,255,255,250);
     //stroke(255,255,255);
     defaultPos = createVector(250,250);
-    limitSpeed = 1.2
+    limitSpeed = 2;
     G = particleSize;
     minConstrain = particleSize;
     maxConstrain = 2*particleSize;
     frictionStrength = .001;
-    ticAmnt = .0005;
+    ticAmnt = .00000000005;
 }

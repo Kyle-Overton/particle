@@ -1,0 +1,22 @@
+{
+  "name": "particle",
+  "version": "1.0.0",
+  "description": "My first npm package",
+  "main": "Edge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kyle-Overton/particle.git"
+  },
+  "keywords": [
+    "particle"
+  ],
+  "author": "Kyle Overton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kyle-Overton/particle/issues"
+  },
+  "homepage": "https://github.com/Kyle-Overton/particle#readme"
+}
