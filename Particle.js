@@ -311,7 +311,7 @@ class Particle {
         this.attract();
         this.checkCollision();
         this.drawConnections();
-        this.reduceSpeed();
+        //this.reduceSpeed();
         this.interaction()
         this.pos.add(this.vel.limit(limitSpeed));
 
